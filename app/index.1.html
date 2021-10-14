@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        </head>
+<body>
+
+    <!-- //<input type="text" id="idRemove" placeholder=" הכנס תז שברצונך למחוק מהמאגר">
+    <input type="button" onclick="deleteCustomer()" value="detet customer by id "> -->
+ <input type="text" id="title" placeholder="title"/> 
+<input type="text" id="description" placeholder="description"/>
+<input type="checkbox" id="published" placeholder=" published"/>
+
+<input type="button" onclick="addCustomer()" value="add student "> 
+</body>
+<script type="text/javascript">
+function deleteCustomer(){
+    debugger;
+    var id=$('#idRemove').val();
+
+
+
+
+
+    $.ajax({
+      
+    url: 'http://localhost:3000/customer/delete/'+id,
+   
+    type: 'DELETE',
+    success: function(result) {
+        alert("sucess");
+        // Do something with the result
+    },
+    error: function(error) {
+        alert("error"+error);
+        // Do something with the result
+    }
+});
+
+}
+function addCustomer(){
+var description=$('#description').val();
+var published=$('#published').val() == "on"?true:false;
+var title=$('#title').val();
+
+$.post("http://localhost:8080/api/tutorials/",
+  {
+    title:title,
+      description: description,
+      published:published,
+      catgorya:"children"
+    
+  },
+  function(data, status){
+    alert("Data: " + data + "\nStatus: " + status);
+  });
+
+}
+    </script>
+</html>
+
